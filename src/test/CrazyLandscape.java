@@ -7,7 +7,7 @@ import animata.Animata;
 import animata.AnimataPlayback;
 import animata.FootController;
 
-public class TestScene extends PApplet {
+public class CrazyLandscape extends PApplet {
 	private AnimataPlayback playback;
 	private MicroKontrol mk;
 
@@ -18,7 +18,7 @@ public class TestScene extends PApplet {
 		playback = new AnimataPlayback(this);
 
 		playback.loadSet("set.xml");
-		playback.debug();
+		//playback.debug();
 		mk = MicroKontrol.getInstance();
 		FootController.getInstance().footSwitches[0].button.listen(Button.PRESSED, this, "doSomething");
 	}

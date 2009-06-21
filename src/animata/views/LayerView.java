@@ -30,7 +30,8 @@ public class LayerView extends ViewBase {
 	}
 
 	public void draw() {
-		//if(!layer.visible) return;
+		if(!layer.visible || layer.alpha == 0) return;
+		if(layer.alpha != 1) applet.tint(layer.alpha * 255);
 		applet.pushMatrix();
 		doTransformation();
 		applet.pushMatrix();
@@ -40,6 +41,7 @@ public class LayerView extends ViewBase {
 		applet.popMatrix();
 
 		applet.popMatrix();
+		if(layer.alpha != 1) applet.tint(255);
 	}
 	private void drawDebugStuff() {
 		if(layer.skeleton == null) return;

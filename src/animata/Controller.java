@@ -53,6 +53,7 @@ public class Controller {
 	public boolean animateBone(String name, float scale) {
 		ArrayList<Bone> bones = Skeleton.findBones(name);
 		for (Bone bone : bones) {
+			//System.out.println("Scaling a bone to " + scale);
 			bone.setScale(scale);
 		}
 		// TODO: extract interface for Animata calls

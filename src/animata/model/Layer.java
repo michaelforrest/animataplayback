@@ -44,12 +44,15 @@ public class Layer{
 	public float scale = 1;
 	public boolean visible = true;
 
+	private static ArrayList<Layer> allLayers = new ArrayList<Layer>();
+
 	public Layer() {
 	}
 
 	public Layer(XMLElement element, String folder) {
 		setupAttributes(element);
 		addChildLayersIfPresent(element, folder);
+		allLayers.add(this);
 	}
 
 	private void addChildLayersIfPresent(XMLElement element, String folder) {
@@ -93,6 +96,7 @@ public class Layer{
 	}
 
 	public void simulate() {
+		if(!visible || alpha == 0) return;
 		if(skeleton != null) skeleton.simulate(40);
 		for (Layer layer : layers) {
 			layer.simulate();
@@ -100,5 +104,22 @@ public class Layer{
 
 	}
 
+	public static void toggle(String name) {
+		for(Layer layer : allLayers){
+			if(layer.name != null && layer.name.equals(name)) layer.visible = !layer.visible;
+		}
+	}
+	public static void setVisibility(String name, boolean visible){
+		for(Layer layer : allLayers){
+			if(layer.name != null && layer.name.equals(name)) layer.visible = visible;
+		}
+	}
+
+	public static void setAlpha(String name, Float value) {
+		for(Layer layer : allLayers){
+			if(layer.name != null && layer.name.equals(name)) layer.alpha = value;
+		}
+
+	}
 
 }

@@ -7,6 +7,7 @@ import processing.xml.XMLElement;
 import rwmidi.MidiInput;
 import rwmidi.RWMidi;
 import animata.controls.ClockBobber;
+import animata.controls.LayerToggle;
 import animata.model.Layer;
 import animata.views.LayerView;
 
@@ -33,8 +34,9 @@ public class AnimataPlayback {
 	private void setup(PApplet applet) {
 		this.applet = applet;
 		Animator.init(applet);
+		LayerToggle.init(applet);
 		camera = new Camera(applet);
-		this.applet.hint(PApplet.ENABLE_OPENGL_2X_SMOOTH);
+
 		root = new Layer();
 		in = RWMidi.getInputDevice("IAC Bus 1 <MIn:0> Apple Computer, Inc.").createInput();
 		clock = new Clock("IAC Bus 2");
@@ -81,7 +83,7 @@ public class AnimataPlayback {
 	}
 	public void draw(){
 		applet.camera(camera.x, camera.y, camera.z, camera.targetX, camera.targetY,camera.targetZ, 0f, 1f, 0f);
-		//root.simulate();
+		root.simulate();
 		applet.textureMode(PApplet.NORMAL);
 		applet.noStroke();
 		applet.fill(0,0);

@@ -31,7 +31,7 @@ public class Animata {
 		OscMessage message = new OscMessage("/cameradeltazoom");
 		message.add(delta);
 		oscP5.send(message, net);
-//		System.out.println("message:" + message + " to  " + net);
+		//System.out.println("message:" + message.toString() + delta + " to  " + net);
 	}
 
 	public static void panLayer(Float deltaX) {
