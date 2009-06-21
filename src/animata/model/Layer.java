@@ -55,6 +55,7 @@ public class Layer{
 	public Layer(XMLElement element, String folder) {
 		setupAttributes(element);
 		addChildLayersIfPresent(element, folder);
+		anchor = findAnchor();
 		allLayers.add(this);
 	}
 
@@ -75,6 +76,7 @@ public class Layer{
 		alpha = element.getFloatAttribute("alpha",1);
 		scale = element.getFloatAttribute("scale",1);
 		visible = element.getIntAttribute("vis") == 1;
+
 	}
 
 	private void setupLayerContents(XMLElement element, String folder) {
@@ -139,14 +141,27 @@ public class Layer{
 	}
 
 	private Joint findAnchor() {
+		if(skeleton == null) return null;
 		for(Joint joint : skeleton.joints){
 			if(joint.name.equals(name + "_anchor")){
-//				System.out.println("anchor for layer:" + name + ".x=" + joint.x + ",y=" +joint.y);
-//				System.out.println("layer position: " + x +"," + y);
+				System.out.println("anchor for layer:" + name + ".x=" + joint.x + ",y=" +joint.y);
+				System.out.println("layer position: " + x +"," + y);
 				return joint;
 			}
 		}
 		return null;
+	}
+
+	public static void setScale(String name, float value) {
+		for(Layer layer : allLayers){
+			if(layer.name != null && layer.name.equals(name)) layer.setScale(value);
+		}
+
+	}
+
+	private void setScale(float value) {
+		scale = value;
+
 	}
 
 }

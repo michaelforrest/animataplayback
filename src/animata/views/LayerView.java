@@ -39,6 +39,7 @@ public class LayerView extends ViewBase {
 		if(layer.anchor != null){
 			applet.translate(layer.anchor.x, layer.anchor.y);
 			applet.rotate(-layer.rotation);
+			applet.scale(layer.scale,layer.scale,1);
 			applet.translate(-layer.anchor.x, -layer.anchor.y);
 		}
 
@@ -75,7 +76,7 @@ public class LayerView extends ViewBase {
 	// this is like the calcTransformationMatrix method from the original, but called during draw
 	private void doTransformation() {
 		applet.translate(layer.x, layer.y,layer.z);
-		applet.scale(layer.scale,layer.scale,1);
+
 
 	}
 

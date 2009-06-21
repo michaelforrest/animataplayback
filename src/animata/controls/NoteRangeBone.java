@@ -17,7 +17,7 @@ public class NoteRangeBone extends Control implements Observer {
 	private float range;
 	private int low;
 	private int high;
-	private Animator animator;
+	protected Animator animator;
 
 	public NoteRangeBone(XMLElement element, MidiInput in) {
 		super(element, in);
