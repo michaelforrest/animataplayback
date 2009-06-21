@@ -3,16 +3,16 @@ package animata.controls;
 import java.util.Observable;
 import java.util.Observer;
 
-import animata.Animator;
-import animata.Controller;
-import animata.NoteParser;
-import animata.NoteParser.BadNoteFormatException;
 import processing.xml.XMLElement;
 import rwmidi.MidiInput;
 import rwmidi.Note;
+import animata.Animator;
+import animata.Controller;
+import animata.NoteParser;
 
 public class NoteRangeBone extends Control implements Observer {
 
+	private static final int ANIMATION_FRAMES_TO_USE = 4;
 	private String bone;
 	private float range;
 	private int low;
@@ -35,7 +35,7 @@ public class NoteRangeBone extends Control implements Observer {
 		if (pitch < low) return;
 		if (pitch > high) return;
 		float length = 1f - ((float) ((pitch - low)) / range);
-		animator.set(length, 4);
+		animator.set(length, ANIMATION_FRAMES_TO_USE);
 	}
 
 	public void update(Observable o, Object arg) {

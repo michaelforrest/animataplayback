@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.vecmath.Matrix3d;
 
 import animata.ViewBase;
+import animata.model.Skeleton.Joint;
 
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -43,6 +44,8 @@ public class Layer{
 	public float alpha = 1;
 	public float scale = 1;
 	public boolean visible = true;
+	public float rotation = 0;
+	public Joint anchor;
 
 	private static ArrayList<Layer> allLayers = new ArrayList<Layer>();
 
@@ -120,6 +123,30 @@ public class Layer{
 			if(layer.name != null && layer.name.equals(name)) layer.alpha = value;
 		}
 
+	}
+
+	public static void setRotation(String name, float value) {
+		for(Layer layer : allLayers){
+			if(layer.name != null && layer.name.equals(name)) layer.setRotation( value);
+		}
+
+	}
+
+	private void setRotation(float value) {
+		if(anchor == null) anchor = findAnchor();
+		rotation = value;
+
+	}
+
+	private Joint findAnchor() {
+		for(Joint joint : skeleton.joints){
+			if(joint.name.equals(name + "_anchor")){
+//				System.out.println("anchor for layer:" + name + ".x=" + joint.x + ",y=" +joint.y);
+//				System.out.println("layer position: " + x +"," + y);
+				return joint;
+			}
+		}
+		return null;
 	}
 
 }

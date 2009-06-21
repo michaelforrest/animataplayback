@@ -17,6 +17,7 @@ public class ControlFactory {
 		if(name.equals("camera")) return new CameraPosition(element, in);
 		if(name.equals("camerashake")) return new CameraShake(element,in);
 		if(name.equals("layertoggle")) return new LayerToggle(element, in);
+		if(name.equals("note_range_angle")) return new NoteRangeAngle(element,in);
 		return new Control(element, in);
 
 	}

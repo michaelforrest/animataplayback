@@ -35,9 +35,18 @@ public class LayerView extends ViewBase {
 		applet.pushMatrix();
 		doTransformation();
 		applet.pushMatrix();
+
+		if(layer.anchor != null){
+			applet.translate(layer.anchor.x, layer.anchor.y);
+			applet.rotate(-layer.rotation);
+			applet.translate(-layer.anchor.x, -layer.anchor.y);
+		}
+
+
 		if(mesh!= null) mesh.draw();
 		if(AnimataPlayback.debugging()) drawDebugStuff();
 		drawChildLayers();
+
 		applet.popMatrix();
 
 		applet.popMatrix();
@@ -67,6 +76,7 @@ public class LayerView extends ViewBase {
 	private void doTransformation() {
 		applet.translate(layer.x, layer.y,layer.z);
 		applet.scale(layer.scale,layer.scale,1);
+
 	}
 
 }
