@@ -19,6 +19,8 @@ public class ControlFactory {
 		if(name.equals("layertoggle")) return new LayerToggle(element, in);
 		if(name.equals("note_range_angle")) return new NoteRangeAngle(element,in);
 		if(name.equals("note_range_scale")) return new NoteRangeScale(element,in);
+		if(name.equals("scale")) return new LayerScaler(element,in);
+		if(name.equals("rotate")) return new LayerRotator(element,in);
 
 		return new Control(element, in);
 

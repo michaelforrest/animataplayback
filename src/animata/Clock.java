@@ -13,8 +13,8 @@ public class Clock extends Observable implements Receiver {
 	private MidiDevice in;
 	private int tick = 0;
 
-	public Clock(String deviceName) {
-		in = getMidiDevice(deviceName);
+	public Clock(MidiDevice device) {
+		in = device;
 		if (!in.isOpen()) try {
 			in.open();
 		} catch (Exception e) {
@@ -30,22 +30,7 @@ public class Clock extends Observable implements Receiver {
 		}
 	}
 
-	private MidiDevice getMidiDevice(String deviceName) {
-		javax.sound.midi.MidiDevice.Info infos[] = MidiSystem.getMidiDeviceInfo();
-		for (javax.sound.midi.MidiDevice.Info info : infos) {
-			System.out.println("info:  " + info.getName());
-			if (info.getName().matches(deviceName + ".*")) {
-				try {
 
-					return MidiSystem.getMidiDevice(info);
-				} catch (MidiUnavailableException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		System.out.println("Error - couldn't find " + deviceName);
-		return null;
-	}
 
 	public void close() {
 		in.close();

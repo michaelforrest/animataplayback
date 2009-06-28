@@ -2,9 +2,15 @@ package animata;
 
 import java.io.File;
 
+import javax.sound.midi.MidiDevice;
+import javax.sound.midi.MidiSystem;
+import javax.sound.midi.MidiUnavailableException;
+import javax.sound.midi.MidiDevice.Info;
+
 import processing.core.PApplet;
 import processing.xml.XMLElement;
 import rwmidi.MidiInput;
+import rwmidi.MidiInputDevice;
 import rwmidi.RWMidi;
 import animata.controls.ClockBobber;
 import animata.controls.LayerToggle;
@@ -25,27 +31,55 @@ public class AnimataPlayback {
 	public static Clock clock;
 
 	public AnimataPlayback(PApplet applet, String nmtFile){
-		setup(applet);
+		setup(applet,"IAC Bus 1","IAC Bus 2");
 		addScene(nmtFile);
 	}
 	public AnimataPlayback(PApplet applet){
-		setup(applet);
+		setup(applet,"IAC Bus 1", "IAC Bus 2");
 	}
-	private void setup(PApplet applet) {
+	public AnimataPlayback(PApplet applet, String midiInPortName, String clockInPortName){
+		setup(applet, midiInPortName, clockInPortName);
+	}
+	private void setup(PApplet applet, String midiInPortName, String clockInPortName) {
 		this.applet = applet;
 		Animator.init(applet);
 		LayerToggle.init(applet);
 		camera = new Camera(applet);
 
 		root = new Layer();
-		in = RWMidi.getInputDevice("IAC Bus 1 <MIn:0> Apple Computer, Inc.").createInput();
-		clock = new Clock("IAC Bus 2");
+		Info midiDeviceInfo = getMidiDeviceInfo(midiInPortName);
+		String inputName = midiDeviceInfo.getName() + " " + midiDeviceInfo.getVendor(); //ooooohhhhh you bad people :-/ (copied from within the rwmidi getName() method)
+		MidiInputDevice inputDevice = RWMidi.getInputDevice(inputName);
+		in = inputDevice.createInput();
+		clock = new Clock(getMidiDevice(clockInPortName));
 		new ClockBobber(clock);
 		new RandomCameraPanner(clock, this);
 		Controller.init(applet,root,this);
 		controller = Controller.getInstance();
 		new GrimoniumInput(applet,root,controller,7111);
 	}
+
+	private Info getMidiDeviceInfo(String deviceName) {
+		javax.sound.midi.MidiDevice.Info infos[] = MidiSystem.getMidiDeviceInfo();
+		for (javax.sound.midi.MidiDevice.Info info : infos) {
+			System.out.println("info:  " + info.getName());
+			if (info.getName().matches(deviceName + ".*")) {
+				System.out.println("found device matching " + deviceName);
+				return info;
+			}
+		}
+		System.out.println("Error - couldn't find " + deviceName);
+		return null;
+	}
+	private MidiDevice getMidiDevice(String deviceName) {
+		try {
+			return MidiSystem.getMidiDevice(getMidiDeviceInfo(deviceName));
+		} catch (MidiUnavailableException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	public void initOSC(int port){
 		new OSCInput(applet,root,controller,port);
 	}

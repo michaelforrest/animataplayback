@@ -57,7 +57,7 @@ public class LayerView extends ViewBase {
 		if(layer.skeleton == null) return;
 		for(Joint joint : layer.skeleton.joints){
 			applet.fill(0xFFFFFF00);
-			applet.ellipse(joint.x, joint.y, 5, 5);
+			applet.ellipse(joint.x, joint.y, 20, 20);
 		}
 		applet.stroke(0x99FF00FF);
 		applet.strokeWeight(5);

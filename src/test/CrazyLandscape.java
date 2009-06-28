@@ -20,7 +20,7 @@ public class CrazyLandscape extends PApplet {
 		playback.loadSet("set.xml");
 		//playback.debug();
 		mk = MicroKontrol.getInstance();
-		FootController.getInstance().footSwitches[0].button.listen(Button.PRESSED, this, "doSomething");
+//		FootController.getInstance().footSwitches[0].button.listen(Button.PRESSED, this, "doSomething");
 	}
 	public void doSomething(){
 		System.out.println("Pressed the switch!");
@@ -42,7 +42,7 @@ public class CrazyLandscape extends PApplet {
 	}
 
 	public static void main(String[] args) {
-		PApplet.main(new String[] { "--bgcolor=#c0c0c0", "TestScene" });
+		PApplet.main(new String[] { "--bgcolor=#c0c0c0", "CrazyLandscape" });
 
 	}
 
