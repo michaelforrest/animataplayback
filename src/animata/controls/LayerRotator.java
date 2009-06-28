@@ -26,7 +26,7 @@ public class LayerRotator extends Control {
 		if(controller.getChannel() != channel) return;
 		if(controller.getCC() != cc) return;
 		float value = range * (controller.getValue() / 127f) + min;
-		Layer.setRotation(layer, value);
+		Layer.setRotation(scene,layer, value);
 	}
 
 

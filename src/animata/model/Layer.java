@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.vecmath.Matrix3d;
 
+import animata.Scene;
 import animata.ViewBase;
 import animata.model.Skeleton.Bone;
 import animata.model.Skeleton.Joint;
@@ -128,12 +129,7 @@ public class Layer{
 
 	}
 
-	public static void setRotation(String name, float value) {
-		for(Layer layer : allLayers){
-			if(layer.name != null && layer.name.equals(name)) layer.setRotation( value);
-		}
 
-	}
 
 	private void setRotation(float value) {
 		if(anchor == null) anchor = findAnchor();
@@ -153,12 +149,6 @@ public class Layer{
 		return null;
 	}
 
-	public static void setScale(String name, float value) {
-		for(Layer layer : allLayers){
-			if(layer.name != null && layer.name.equals(name)) layer.setScale(value);
-		}
-
-	}
 
 	private void setScale(float value) {
 		scale = value;
@@ -171,6 +161,27 @@ public class Layer{
 		}
 		if(skeleton == null) return;
 		bones.addAll(skeleton.bones);
+	}
+
+	public static void setScale(Scene scene, String name, float value) {
+		for(Layer layer : scene.layers){
+			if(layer.name != null && layer.name.equals(name)) layer.setScale(value);
+		}
+
+	}
+
+	public void getAllLayers(ArrayList<Layer> result) {
+		for(Layer layer : layers){
+			layer.getAllLayers(result);
+		}
+		result.addAll(layers);
+	}
+
+	public static void setRotation(Scene scene, String name, float value) {
+		for(Layer layer : scene.layers){
+			if(layer.name != null && layer.name.equals(name)) layer.setRotation( value);
+		}
+
 	}
 
 }

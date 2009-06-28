@@ -41,6 +41,10 @@ public class Controller {
 	}
 
 	public boolean setBoneTempo(Scene scene, String name, Float tempo) {
+		if(scene == null){
+			System.out.println("tried to access bone info before scene was added");
+			return false;
+		}
 		ArrayList<Bone> bones = scene.findBones(name);
 		for (Bone bone : bones) {
 			bone.setTempo(tempo);

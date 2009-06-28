@@ -44,7 +44,7 @@ public class NoteRangeScale extends Control implements Observer {
 		animator.set(off, OUT_FRAMES);
 	}
 	public void update(Observable o, Object arg) {
-		Layer.setScale(layer, animator.currentValue);
+		Layer.setScale(scene, layer, animator.currentValue);
 	}
 
 }

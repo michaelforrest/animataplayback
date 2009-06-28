@@ -24,6 +24,7 @@ public class Scene implements Observer {
 	private Layer layer;
 	private Animator animator;
 	public ArrayList<Bone> bones;
+	public ArrayList<Layer> layers;
 
 	public Scene(XMLElement element, MidiInput in, PApplet applet, Layer layer) {
 		this.in = in;
@@ -37,6 +38,10 @@ public class Scene implements Observer {
 
 		bones = new ArrayList<Bone>();
 		layer.getAllBones(bones);
+
+		layers = new ArrayList<Layer>();
+		layer.getAllLayers(layers);
+
 	}
 
 	private void setupToggle() {

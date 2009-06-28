@@ -50,7 +50,7 @@ public class NoteRangeAngle extends Control implements Observer{
 		animator.set(angle, FRAMES_TO_USE);
 	}
 	public void update(Observable o, Object arg) {
-		Layer.setRotation(layer, animator.currentValue);
+		Layer.setRotation(scene, layer, animator.currentValue);
 
 	}
 }

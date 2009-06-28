@@ -26,7 +26,7 @@ public class LayerScaler extends Control{
 		if(controller.getChannel() != channel) return;
 		if(controller.getCC() != cc) return;
 		float value = range * (controller.getValue() / 127f) + min;
-		Layer.setScale(layer, value);
+		Layer.setScale(scene, layer, value);
 	}
 
 }

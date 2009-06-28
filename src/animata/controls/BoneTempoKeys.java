@@ -21,7 +21,7 @@ public class BoneTempoKeys extends Control {
 		this.high = high;
 		this.bone = bone;
 		this.tempo = tempo;
-		Controller.getInstance().setBoneTempo(scene,bone, 0f);
+//		Controller.getInstance().setBoneTempo(scene,bone, 0f);
 	}
 
 	public BoneTempoKeys(XMLElement element, MidiInput in) {
@@ -30,7 +30,7 @@ public class BoneTempoKeys extends Control {
 		high = NoteParser.getNote(element.getStringAttribute("high", "100"));
 		bone = element.getStringAttribute("bone");
 		tempo = element.getFloatAttribute("tempo");
-		Controller.getInstance().setBoneTempo(scene,bone, 0f);
+//		Controller.getInstance().setBoneTempo(scene,bone, 0f);
 	}
 
 	public void noteOnReceived(Note n) {
