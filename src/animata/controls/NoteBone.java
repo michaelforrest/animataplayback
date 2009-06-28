@@ -52,7 +52,7 @@ public class NoteBone extends Control implements Observer {
 	}
 
 	public void update(Observable o, Object arg) {
-		controller.animateBone(bone, animator.currentValue);
+		controller.animateBone(scene, bone, animator.currentValue);
 	}
 
 }

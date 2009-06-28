@@ -26,7 +26,7 @@ public class ClockBobber implements Observer {
 	}
 
 	private void updateAnimation() {
-		Controller.getInstance().animateBone("crotchet", 1 - (float)Math.sin(animator.currentValue));
+		Controller.getInstance().animateAllBones("crotchet", 1 - (float)Math.sin(animator.currentValue));
 	}
 
 }

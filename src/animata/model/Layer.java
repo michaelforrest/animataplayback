@@ -166,8 +166,11 @@ public class Layer{
 	}
 
 	public void getAllBones(ArrayList<Bone> bones) {
-		//bones.addAll(skeleton.bones);
-
+		for(Layer layer : layers){
+			layer.getAllBones(bones);
+		}
+		if(skeleton == null) return;
+		bones.addAll(skeleton.bones);
 	}
 
 }

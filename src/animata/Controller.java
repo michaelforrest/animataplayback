@@ -40,8 +40,8 @@ public class Controller {
 		return false;
 	}
 
-	public boolean setBoneTempo(String name, Float tempo) {
-		ArrayList<Bone> bones = Skeleton.findBones(name);
+	public boolean setBoneTempo(Scene scene, String name, Float tempo) {
+		ArrayList<Bone> bones = scene.findBones(name);
 		for (Bone bone : bones) {
 			bone.setTempo(tempo);
 		}
@@ -50,14 +50,18 @@ public class Controller {
 		return true;
 	}
 
-	public boolean animateBone(String name, float scale) {
-		ArrayList<Bone> bones = Skeleton.findBones(name);
+	public boolean animateBone(Scene scene, String name, float scale) {
+		ArrayList<Bone> bones = scene.findBones(name);
+		// TODO: extract interface for Animata calls
+		Animata.setBone(name, scale);
+		return animateBones(scale, bones);
+	}
+
+	private boolean animateBones(float scale, ArrayList<Bone> bones) {
 		for (Bone bone : bones) {
 			//System.out.println("Scaling a bone to " + scale);
 			bone.setScale(scale);
 		}
-		// TODO: extract interface for Animata calls
-		Animata.setBone(name, scale);
 		return true;
 	}
 
@@ -77,6 +81,11 @@ public class Controller {
 
 	public void shakeCamera() {
 		animataPlayback.camera.shake();
+
+	}
+
+	public void animateAllBones(String string, float scale) {
+		animateBones(scale, Skeleton.findAllBones(string));
 
 	}
 

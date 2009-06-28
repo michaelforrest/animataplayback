@@ -23,7 +23,7 @@ public class Scene implements Observer {
 	private String id;
 	private Layer layer;
 	private Animator animator;
-	private ArrayList<Bone> bones;
+	public ArrayList<Bone> bones;
 
 	public Scene(XMLElement element, MidiInput in, PApplet applet, Layer layer) {
 		this.in = in;
@@ -62,6 +62,14 @@ public class Scene implements Observer {
 	public void update(Observable o, Object arg) {
 		layer.y = animator.currentValue;
 		if(animator.currentValue == 0) Controller.getInstance().shakeCamera();
+	}
+	public ArrayList<Bone> findBones(String name) {
+		ArrayList<Bone> result = new ArrayList<Bone>();
+		for (Bone bone : bones) {
+			if(bone.name.equals(name)) result.add(bone);
+		}
+		if(result.size() == 0) System.out.println("sorry, couldn't find a bone called " + name);
+		return result;
 	}
 
 }

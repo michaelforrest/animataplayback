@@ -78,7 +78,7 @@ public class Skeleton {
 		public Float tempo;
 		private float time;
 		private AttachedVertex[] attachedVertices;
-		private String name;
+		public String name;
 		private float stiffness;
 		public float size;
 		private float radius;
@@ -270,12 +270,20 @@ public class Skeleton {
 
 	}
 
-	public static ArrayList<Bone> findBones(String name) {
+	public ArrayList<Bone> findBones(String name) {
+		ArrayList<Bone> result = new ArrayList<Bone>();
+		for (Bone bone : bones) {
+			if(bone.name.equals(name)) result.add(bone);
+		}
+		if(result.size() == 0) System.out.println("sorry, couldn't find a bone called " + name);
+		return result;
+	}
+
+	public static ArrayList<Bone> findAllBones(String name) {
 		ArrayList<Bone> result = new ArrayList<Bone>();
 		for (Bone bone : allBones) {
 			if(bone.name.equals(name)) result.add(bone);
 		}
-		if(result.size() == 0) System.out.println("sorry, couldn't find a bone called " + name);
 		return result;
 	}
 

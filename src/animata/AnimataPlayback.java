@@ -80,16 +80,6 @@ public class AnimataPlayback {
 		}
 	}
 
-	public void initOSC(int port){
-		new OSCInput(applet,root,controller,port);
-	}
-	/*
-	 * defaults to port 7110
-	 */
-	public void initOSC(){
-		new OSCInput(applet,root,controller,7110);
-	}
-
 
 	public void loadSet(String xml){
 

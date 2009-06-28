@@ -39,7 +39,7 @@ public class NoteRangeBone extends Control implements Observer {
 	}
 
 	public void update(Observable o, Object arg) {
-		Controller.getInstance().animateBone(bone, animator.currentValue);
+		Controller.getInstance().animateBone(scene, bone, animator.currentValue);
 
 	}
 }
