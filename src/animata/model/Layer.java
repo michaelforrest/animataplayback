@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.vecmath.Matrix3d;
 
 import animata.ViewBase;
+import animata.model.Skeleton.Bone;
 import animata.model.Skeleton.Joint;
 
 import processing.core.PApplet;
@@ -161,6 +162,11 @@ public class Layer{
 
 	private void setScale(float value) {
 		scale = value;
+
+	}
+
+	public void getAllBones(ArrayList<Bone> bones) {
+		//bones.addAll(skeleton.bones);
 
 	}
 

@@ -1,6 +1,7 @@
 package animata;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -10,6 +11,7 @@ import rwmidi.MidiInput;
 import animata.controls.Control;
 import animata.controls.ControlFactory;
 import animata.model.Layer;
+import animata.model.Skeleton.Bone;
 
 public class Scene implements Observer {
 
@@ -21,6 +23,7 @@ public class Scene implements Observer {
 	private String id;
 	private Layer layer;
 	private Animator animator;
+	private ArrayList<Bone> bones;
 
 	public Scene(XMLElement element, MidiInput in, PApplet applet, Layer layer) {
 		this.in = in;
@@ -32,6 +35,8 @@ public class Scene implements Observer {
 		addControls(element.getChildren());
 		animator = new Animator(OFF_CAMERA,this);
 
+		bones = new ArrayList<Bone>();
+		layer.getAllBones(bones);
 	}
 
 	private void setupToggle() {
@@ -50,6 +55,7 @@ public class Scene implements Observer {
 			XMLElement element = elements[i];
 			Control control = ControlFactory.createControl(element, in);
 			controls[i] = control;
+			control.scene = this;
 		}
 	}
 

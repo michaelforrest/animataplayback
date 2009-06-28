@@ -3,12 +3,14 @@ package animata.controls;
 import processing.xml.XMLElement;
 import rwmidi.MidiInput;
 import animata.Controller;
+import animata.Scene;
 
 public class Control {
 
 	protected int channel;
 	protected final Controller controller = Controller.getInstance();
 	protected MidiInput in;
+	public Scene scene;
 
 	public Control(XMLElement element, MidiInput in) {
 		init(element.getIntAttribute("channel", element.getParent().getIntAttribute("channel")) - 1,in);

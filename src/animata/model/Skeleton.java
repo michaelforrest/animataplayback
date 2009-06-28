@@ -99,8 +99,8 @@ public class Skeleton {
 
 		private void assignAttributes(XMLElement element) {
 			name = element.getStringAttribute("name", "");
-			j0 = joints[element.getIntAttribute("j0")];
-			j1 = joints[element.getIntAttribute("j1")];
+			j0 = joints.get(element.getIntAttribute("j0"));
+			j1 = joints.get(element.getIntAttribute("j1"));
 			stiffness = element.getFloatAttribute("stiffness");
 			scale = element.getFloatAttribute("lm");
 			maxScale = element.getFloatAttribute("lmmax");
@@ -225,8 +225,8 @@ public class Skeleton {
 
 	}
 
-	public Joint[] joints;
-	public Bone[] bones;
+	public ArrayList<Joint> joints;
+	public ArrayList<Bone> bones;
 	private final Mesh mesh;
 
 	private static ArrayList<Bone> allBones = new ArrayList<Bone>();
@@ -238,21 +238,21 @@ public class Skeleton {
 	}
 
 	private void addBones(XMLElement[] children) {
-		bones = new Bone[children.length];
+		bones = new ArrayList<Bone>();
 		for (int i = 0; i < children.length; i++) {
 			XMLElement element = children[i];
 			Bone bone = new Bone(element);
-			bones[i] = bone;
+			bones.add( bone );
 			allBones.add(bone);
 		}
 	}
 
 	private void addJoints(XMLElement[] children) {
-		joints = new Joint[children.length];
+		joints = new ArrayList<Joint>();
 		for (int i = 0; i < children.length; i++) {
 			XMLElement element = children[i];
 			Joint joint =  new Joint(element);
-			joints[i] = joint;
+			joints.add( joint );
 		}
 
 	}
